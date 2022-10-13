@@ -6,7 +6,6 @@ public class Square extends Rectangle {
 		super(side, side);
 	}
 	
-	@Override
 	public void setWidth(double width) throws Exception {
 		if(width > 0) {
 			super.setWidth(width);
