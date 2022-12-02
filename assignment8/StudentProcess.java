@@ -3,15 +3,15 @@ package student;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-//import java.util.Map;
-//import java.util.TreeMap;
-//import java.util.function.Consumer;
-//import java.util.function.BiConsumer;
-//import java.util.function.Function;
-//import java.util.function.Predicate;
-//import java.util.stream.Stream;
-//import java.util.stream.Collectors;
-//import java.util.Optional;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.Consumer;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+import java.util.Optional;
 
 public class StudentProcess {
 	
@@ -70,6 +70,45 @@ public class StudentProcess {
 					.distinct()
 					.sorted()
 					.forEach(System.out::println);
+				
+				System.out.print("\n\n");
+				System.out.println("Task 6:\n");
+				System.out.println("Student names in order by last name then first name:");
+				studentList.stream()
+					.sorted(Comparator.comparing(Student::getLastName).thenComparing(Student::getFirstName))
+					.map(Student::getName)
+					.forEach(System.out::println);
+				
+				System.out.print("\n\n");
+				System.out.println("Task 7:\n");
+				System.out.println("Students by department:");
+				Map<String, List<Student>> studentsByDepartment = studentList.stream().collect(Collectors.groupingBy(Student::getDepartment));
+				studentsByDepartment.forEach((department, studentsInDepartment) -> {
+					System.out.println(department);
+					studentsInDepartment.forEach(student -> {
+						System.out.println("   " + student.toString());
+					});
+				});
+				
+				System.out.print("\n\n");
+				System.out.println("Task 8:\n");
+				System.out.println("Count of Students by department:");
+				Map<String, Long> studentsByDepartment2 = studentList.stream().collect(Collectors.groupingBy(Student::getDepartment, TreeMap::new, Collectors.counting()));
+				studentsByDepartment2.forEach((department, numOfStudentsInDepartment) -> {
+					System.out.println(department + " has " + numOfStudentsInDepartment + " Student(s)");
+				});
+				
+				System.out.print("\n\n");
+				System.out.println("Task 9:\n");
+				System.out.print("Sum of Students' grades: ");
+				double sum = studentList.stream().mapToDouble(Student::getGrade).sum();
+				System.out.println(sum);
+				
+				System.out.print("\n\n");
+				System.out.println("Task 10:\n");
+				System.out.print("Average of Students' grades: ");
+				double average = studentList.stream().mapToDouble(Student::getGrade).average().getAsDouble();
+				System.out.println(String.format("%.2f", average));
 		
 		
 	}

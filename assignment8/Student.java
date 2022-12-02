@@ -15,6 +15,10 @@ public class Student {
 			this.setGrade(grade);
 			this.setDepartment(department);
 		}
+		// Full Name
+		public String getName() {
+			return getFirstName() + " " + getLastName();
+		}
 		
 		// fistName
 		public void setFirstName(String firstName) {
@@ -58,6 +62,8 @@ public class Student {
 			} else {
 				return false;
 			}
+			
+			
 		}	
 		
 		// ToString
